@@ -21,3 +21,6 @@ doc/html
 ./vscode
 
 .DS_Store
+
+# VisualStudio
+.vs/*

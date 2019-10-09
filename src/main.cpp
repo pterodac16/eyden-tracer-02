@@ -66,8 +66,12 @@ Mat RenderFrame(void)
 
 	for (int y = 0; y < img.rows; y++)
 		for (int x = 0; x < img.cols; x++) {
-			scene.m_pCamera->InitRay(x, y, ray); // initialize ray
-			img.at<Vec3f>(y, x) = scene.RayTrace(ray); 
+			scene.m_pCamera->InitRay(x, y, ray); // initialize ray 
+			Vec3f color = RGB(0, 0, 0);
+			if (scene.Intersect(ray)) {
+				color = RGB(1, 1, 1);
+			}
+			img.at<Vec3f>(y, x) = color; 
 		}
 	
 	img.convertTo(img, CV_8UC3, 255);

@@ -50,6 +50,7 @@ public:
 		}
 		
 		ray.t = dist;
+		ray.hit = this;
 		return true;
 	}
 	

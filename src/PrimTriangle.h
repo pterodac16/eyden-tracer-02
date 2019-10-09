@@ -53,6 +53,7 @@ public:
 		if (ray.t <= f || f <  Epsilon  ) return false;
 		
 		ray.t = f;
+		ray.hit = this;
 		
 		return true;
 	}

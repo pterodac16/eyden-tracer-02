@@ -27,7 +27,7 @@ public:
 	 */
 	void Add(const std::shared_ptr<CPrim> pPrim)
 	{
-		// --- PUT YOUR CODE HERE ---
+		m_vpPrims.push_back(pPrim); 
 	}
 	/**
 	 * @brief Adds a new light to the scene
@@ -46,7 +46,11 @@ public:
 	 */
 	bool Intersect(Ray& ray) const
 	{
-		// --- PUT YOUR CODE HERE ---
+		for (int i = 0; i < m_vpPrims.size(); i++) {
+			if (m_vpPrims[i]->Intersect(ray)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
