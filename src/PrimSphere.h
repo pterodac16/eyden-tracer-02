@@ -56,8 +56,9 @@ public:
 	
 	virtual Vec3f GetNormal(const Ray& ray) const override
 	{
-		// --- PUT YOUR CODE HERE ---
-		return Vec3f();
+		Vec3f intersectionPoint = ray.org + ray.dir * ray.t;
+		Vec3f normal = normalize(intersectionPoint - m_center);
+		return normal;
 	}
 	
 private:

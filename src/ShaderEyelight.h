@@ -21,8 +21,10 @@ public:
 
 	virtual Vec3f Shade(const Ray& ray) const override
 	{
-		// --- PUT YOUR CODE HERE ---
-		return RGB(0, 0, 0);
+		Vec3f normal = ray.hit->GetNormal(ray);
+		float cosTheta = normal.dot(ray.dir);
+		Vec3f result = fabs(cosTheta) * m_color;
+		return result;
 	}
 };
 

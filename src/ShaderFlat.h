@@ -17,10 +17,9 @@ public:
   
 	virtual Vec3f Shade(const Ray& ray = Ray()) const override
 	{
-		// --- PUT YOUR CODE HERE ---
-		return RGB(0, 0, 0);
+		return m_color;
 	}
 
-private:
+protected:
 	Vec3f m_color;
 };
