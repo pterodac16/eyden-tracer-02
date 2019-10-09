@@ -69,8 +69,11 @@ public:
 	 */
 	Vec3f RayTrace(Ray& ray) const
 	{
-		// --- PUT YOUR CODE HERE ---
-		return Vec3f();
+		Vec3f color = RGB(0, 0, 0);
+		if (Intersect(ray)) {
+			color = RGB(1, 1, 1);
+		}
+		return color;
 	}
 
 
