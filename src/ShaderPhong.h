@@ -44,6 +44,7 @@ public:
 				std::optional<Vec3f> lightRadiance = m_scene.m_vpLights[i]->Illuminate(lightRay);
 				lightRay.t = std::numeric_limits<float>::infinity();
 				if (!m_scene.Occluded(lightRay)) {
+					// only this part for problem 2.4 (no occlusion testing)
 					if (lightRadiance) {
 						float cosTheta = max(lightRay.dir.dot(ray.hit->GetNormal(ray)), 0.0f);
 						lightSourceDiffuseSum += *lightRadiance * cosTheta;
@@ -64,6 +65,7 @@ public:
 				incidentRay.t = std::numeric_limits<float>::infinity();
 				if (!m_scene.Occluded(lightRay)) {
 					if (lightRadiance) {
+						// only this part for problem 2.4 (no occlusion testing)
 						Vec3f reflectedDir = incidentRay.dir - 2 * (incidentRay.dir.dot(ray.hit->GetNormal(ray))) * ray.hit->GetNormal(ray);
 						float cosTheta = max(ray.dir.dot(reflectedDir), 0.0f);
 						lightSourceSpecularSum += *lightRadiance * pow(cosTheta, m_ke);

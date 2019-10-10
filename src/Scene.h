@@ -71,6 +71,8 @@ public:
 	{
 		Vec3f color = m_bgColor;
 		if (Intersect(ray)) {
+			// for problem 2.2
+			// color = RGB(1,1,1);
 			color = ray.hit->getShader()->Shade(ray);
 		}
 		return color;
