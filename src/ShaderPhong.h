@@ -28,8 +28,34 @@ public:
 
 	virtual Vec3f Shade(const Ray& ray) const override
 	{
-		// --- PUT YOUR CODE HERE ---
-		return RGB(0, 0, 0);
+		Vec3f ambientColor = m_ka * m_color;
+		
+		Vec3f lightSourceDiffuseSum = 0;
+		Ray lightRay;
+		for (int i = 0; i<m_scene.m_vpLights.size(); i++) {
+			lightRay.org = ray.org + ray.dir * ray.t;
+			std::optional<Vec3f> lightRadiance = m_scene.m_vpLights[i]->Illuminate(lightRay);
+			if (lightRadiance) {
+				float cosTheta = max(lightRay.dir.dot(ray.hit->GetNormal(ray)), 0.0f);
+				lightSourceDiffuseSum += *lightRadiance * cosTheta;
+			}
+		}
+		Vec3f diffuseColor = m_kd * lightSourceDiffuseSum.mul(m_color);
+
+		Vec3f lightSourceSpecularSum = 0;
+		Ray incidentRay;
+		for (int i = 0; i<m_scene.m_vpLights.size(); i++) {
+			incidentRay.org = ray.org + ray.dir * ray.t;
+			std::optional<Vec3f> lightRadiance = m_scene.m_vpLights[i]->Illuminate(incidentRay);
+			if (lightRadiance) {
+				Vec3f reflectedDir = incidentRay.dir - 2 * (incidentRay.dir.dot(ray.hit->GetNormal(ray))) * ray.hit->GetNormal(ray);
+				float cosTheta = max(ray.dir.dot(reflectedDir), 0.0f);
+				lightSourceSpecularSum += *lightRadiance * pow(cosTheta, m_ke);
+			}
+		}
+		Vec3f specularColor = m_ks * RGB(1, 1, 1).mul(lightSourceSpecularSum);
+		
+		return diffuseColor + specularColor + ambientColor;
 	}
 
 	

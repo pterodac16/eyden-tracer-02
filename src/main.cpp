@@ -24,23 +24,23 @@ Mat RenderFrame(void)
 	//auto shd3 = std::make_shared<CShaderFlat>(RGB(0, 0, 1)); // blue surface
 	//auto shd4 = std::make_shared<CShaderFlat>(RGB(1, 1, 0)); // yellow surface
 	//auto shd5 = std::make_shared<CShaderFlat>(RGB(0, 1, 1)); // cyan surface
-	auto shd6 = std::make_shared<CShaderFlat>(RGB(1, 1, 1)); // white surface
+	//auto shd6 = std::make_shared<CShaderFlat>(RGB(1, 1, 1)); // white surface
 
 	// EyeLight surface shaders
-	auto shd1 = std::make_shared<CShaderEyelight>(RGB(1, 0, 0)); // red surface
-	auto shd2 = std::make_shared<CShaderEyelight>(RGB(0, 1, 0)); // green surface
-	auto shd3 = std::make_shared<CShaderEyelight>(RGB(0, 0, 1)); // blue surface
-	auto shd4 = std::make_shared<CShaderEyelight>(RGB(1, 1, 0)); // yellow surface
-	auto shd5 = std::make_shared<CShaderEyelight>(RGB(0, 1, 1)); // cyan surface
+	//auto shd1 = std::make_shared<CShaderEyelight>(RGB(1, 0, 0)); // red surface
+	//auto shd2 = std::make_shared<CShaderEyelight>(RGB(0, 1, 0)); // green surface
+	//auto shd3 = std::make_shared<CShaderEyelight>(RGB(0, 0, 1)); // blue surface
+	//auto shd4 = std::make_shared<CShaderEyelight>(RGB(1, 1, 0)); // yellow surface
+	//auto shd5 = std::make_shared<CShaderEyelight>(RGB(0, 1, 1)); // cyan surface
 //	auto shd6 = std::make_shared<CShaderEyelight>(RGB(1, 1, 1)); // white surface
 
 	// Phong surface shaders
-//	auto shd1 = std::make_shared<CShaderPhong>(scene, RGB(1, 0, 0), 0.1f, 0.5f, 0.5f, 40); // red surface
-//	auto shd2 = std::make_shared<CShaderPhong>(scene, RGB(0, 1, 0), 0.1f, 0.5f, 0.5f, 40); // green surface
-//	auto shd3 = std::make_shared<CShaderPhong>(scene, RGB(0, 0, 1), 0.1f, 0.5f, 0.5f, 40); // blue surface
-//	auto shd4 = std::make_shared<CShaderPhong>(scene, RGB(1, 1, 0), 0.1f, 0.5f, 0.5f, 40); // yellow surface
-//	auto shd5 = std::make_shared<CShaderPhong>(scene, RGB(0, 1, 1), 0.1f, 0.5f, 0.5f, 40); // cyan surface
-//	auto shd6 = std::make_shared<CShaderPhong>(scene, RGB(1, 1, 1), 0.1f, 0.5f, 0.5f, 40); // white surface
+	auto shd1 = std::make_shared<CShaderPhong>(scene, RGB(1, 0, 0), 0.1f, 2.0f, 2.0f, 40); // red surface
+	auto shd2 = std::make_shared<CShaderPhong>(scene, RGB(0, 1, 0), 0.1f, 2.0f, 2.0f, 40); // green surface
+	auto shd3 = std::make_shared<CShaderPhong>(scene, RGB(0, 0, 1), 0.1f, 2.0f, 2.0f, 40); // blue surface
+	auto shd4 = std::make_shared<CShaderPhong>(scene, RGB(1, 1, 0), 0.1f, 2.0f, 2.0f, 40); // yellow surface
+	auto shd5 = std::make_shared<CShaderPhong>(scene, RGB(0, 1, 1), 0.1f, 2.0f, 2.0f, 40); // cyan surface
+	auto shd6 = std::make_shared<CShaderPhong>(scene, RGB(1, 1, 1), 0.1f, 2.0f, 2.0f, 40); // white surface
 
 	// Add primitives to scene
 	scene.Add(std::make_shared<CPrimSphere>(Vec3f(-2, 1.7f, 0), 2, shd1));
