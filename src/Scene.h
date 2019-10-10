@@ -60,8 +60,7 @@ public:
 	 */
 	bool Occluded(Ray& ray)
 	{
-		// --- PUT YOUR CODE HERE ---
-		return false;
+		return Intersect(ray);
 	}
 
 	/**

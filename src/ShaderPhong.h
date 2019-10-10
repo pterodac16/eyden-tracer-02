@@ -35,9 +35,12 @@ public:
 		for (int i = 0; i<m_scene.m_vpLights.size(); i++) {
 			lightRay.org = ray.org + ray.dir * ray.t;
 			std::optional<Vec3f> lightRadiance = m_scene.m_vpLights[i]->Illuminate(lightRay);
-			if (lightRadiance) {
-				float cosTheta = max(lightRay.dir.dot(ray.hit->GetNormal(ray)), 0.0f);
-				lightSourceDiffuseSum += *lightRadiance * cosTheta;
+			lightRay.t = std::numeric_limits<float>::infinity();
+			if (!m_scene.Occluded(lightRay)) {
+				if (lightRadiance) {
+					float cosTheta = max(lightRay.dir.dot(ray.hit->GetNormal(ray)), 0.0f);
+					lightSourceDiffuseSum += *lightRadiance * cosTheta;
+				}
 			}
 		}
 		Vec3f diffuseColor = m_kd * lightSourceDiffuseSum.mul(m_color);
@@ -47,10 +50,13 @@ public:
 		for (int i = 0; i<m_scene.m_vpLights.size(); i++) {
 			incidentRay.org = ray.org + ray.dir * ray.t;
 			std::optional<Vec3f> lightRadiance = m_scene.m_vpLights[i]->Illuminate(incidentRay);
-			if (lightRadiance) {
-				Vec3f reflectedDir = incidentRay.dir - 2 * (incidentRay.dir.dot(ray.hit->GetNormal(ray))) * ray.hit->GetNormal(ray);
-				float cosTheta = max(ray.dir.dot(reflectedDir), 0.0f);
-				lightSourceSpecularSum += *lightRadiance * pow(cosTheta, m_ke);
+			incidentRay.t = std::numeric_limits<float>::infinity();
+			if (!m_scene.Occluded(lightRay)) {
+				if (lightRadiance) {
+					Vec3f reflectedDir = incidentRay.dir - 2 * (incidentRay.dir.dot(ray.hit->GetNormal(ray))) * ray.hit->GetNormal(ray);
+					float cosTheta = max(ray.dir.dot(reflectedDir), 0.0f);
+					lightSourceSpecularSum += *lightRadiance * pow(cosTheta, m_ke);
+				}
 			}
 		}
 		Vec3f specularColor = m_ks * RGB(1, 1, 1).mul(lightSourceSpecularSum);
